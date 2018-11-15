@@ -15,27 +15,23 @@ class Api::V0::UrlShortenedController < Api::ApplicationController
 
    # POST /url_shortened/
    def create
-     @resource = resource_class.short(params[:id])
+     @resource = ShortUrl.short(params[:id])
      json_response({key: @resource}, :created)
    end
 
    # DELETE /url_shortened/:id
    def destroy
-     resource_class.destroy(params[:id])
+     ShortUrl.destroy(params[:id])
      head :no_content
    end
 
    private
 
    def set_resource
-     @resource = resource_class.expand(params[:id])
+     @resource = ShortUrl.expand(params[:id])
    end
 
    def set_resources
-     @resources = resource_class.all
-   end
-
-   def resource_class
-     ShortUrl
+     @resources = ShortUrl.all
    end
 end

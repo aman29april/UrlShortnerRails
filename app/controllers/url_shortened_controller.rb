@@ -3,9 +3,6 @@ class UrlShortenedController < ApplicationController
   before_action :find_url, only: [:show, :shortened]
   before_action :set_urls
 
-  def index
-  end
-
   def create
     key = ShortUrl.short(params[:url][:original_url])
     flash[:notice] = "Short link generated!!"
